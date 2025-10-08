@@ -1,0 +1,29 @@
+// Arduino-based Fire Alarm System
+
+int flameSensor = 2;   // Flame sensor output pin
+int buzzer = 3;        // Buzzer pin
+int led = 4;           // LED pin
+
+void setup() {
+  pinMode(flameSensor, INPUT);
+  pinMode(buzzer, OUTPUT);
+  pinMode(led, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Fire Alarm System Active");
+}
+
+void loop() {
+  int fireDetected = digitalRead(flameSensor);
+
+  if (fireDetected == LOW) {  // LOW means fire detected (for most flame sensors)
+    digitalWrite(buzzer, HIGH);
+    digitalWrite(led, HIGH);
+    Serial.println("🔥 Fire Detected! Alarm ON!");
+  } else {
+    digitalWrite(buzzer, LOW);
+    digitalWrite(led, LOW);
+    Serial.println("No Fire Detected.");
+  }
+
+  delay(500);
+}
